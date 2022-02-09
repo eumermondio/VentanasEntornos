@@ -21,6 +21,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
 import javax.swing.JCheckBox;
 import java.awt.Font;
+import javax.swing.JScrollPane;
 
 public class Ventana1 extends JFrame {
 
@@ -29,10 +30,10 @@ public class Ventana1 extends JFrame {
 	private JTextField textField_2;
 	private JComboBox comboBoxProducto;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JRadioButton rdbtnNewRadioButton;
-	private JRadioButton rdbtnAdministracin;
-	private JRadioButton rdbtnInformatica;
-	private JRadioButton rdbtnContabilidad;
+	private JRadioButton rdbtnextraPremium;
+	private JRadioButton rdbtnPremium;
+	private JRadioButton rdbtnPrimera;
+	private JRadioButton rdbtnSegunda;
 	private JCheckBox chckbxInforme;
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
 	private JRadioButton radioButton;
@@ -62,6 +63,7 @@ public class Ventana1 extends JFrame {
 	public Ventana1() {
 		setTitle("Gestión de productos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 		setBounds(100, 100, 461, 606);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -96,32 +98,55 @@ public class Ventana1 extends JFrame {
 		btnInsertarDatos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				textArea.setText("\tVER DATOS");
+				textArea.setText("\t               VER DATOS");
 				textArea.append("\nNombre del producto: " + textField_1.getText());
 				textArea.append("\nPrecio del producto: " + textField_2.getText());
 				textArea.append("\nTipo de producto: " + comboBoxProducto.getSelectedItem());
 
-				ButtonModel personal = rdbtnNewRadioButton.getModel();
-				ButtonModel admin = rdbtnAdministracin.getModel();
-				ButtonModel inform = rdbtnInformatica.getModel();
-				ButtonModel contab = rdbtnContabilidad.getModel();
-				
+				ButtonModel extraPremium = rdbtnextraPremium.getModel();
+				ButtonModel premium = rdbtnPremium.getModel();
+				ButtonModel primera = rdbtnPrimera.getModel();
+				ButtonModel segunda = rdbtnSegunda.getModel();
+
+				ButtonModel iva4 = radioButton.getModel();
+				ButtonModel iva10 = radioButton_1.getModel();
+				ButtonModel iva21 = radioButton_2.getModel();
+
 				if (buttonGroup.getSelection() != null) {
-					if (buttonGroup.getSelection().equals(personal)) {
-						System.out.println("Has pulsado Personal.");
+					if (buttonGroup.getSelection().equals(extraPremium)) {
+						textArea.append("\nCategoría: " + rdbtnextraPremium.getText());
 					}
-					if (buttonGroup.getSelection().equals(admin)) {
-						System.out.println("Has pulsado Administración.");
+					if (buttonGroup.getSelection().equals(premium)) {
+						textArea.append("\nCategoría: " + rdbtnPremium.getText());
 					}
-					if (buttonGroup.getSelection().equals(inform)) {
-						System.out.println("Has pulsado Informática.");
+					if (buttonGroup.getSelection().equals(primera)) {
+						textArea.append("\nCategoría: " + rdbtnPrimera.getText());
 					}
-					if (buttonGroup.getSelection().equals(contab)) {
-						System.out.println("Has pulsado Contabilidad.");
+					if (buttonGroup.getSelection().equals(segunda)) {
+						textArea.append("\nCategoría: " + rdbtnSegunda.getText());
 					}
+				} else {
+					textArea.append("\nCategoría: No Seleccionada");
 				}
+
+				if (buttonGroup_1.getSelection() != null) {
+					if (buttonGroup_1.getSelection().equals(iva4)) {
+						textArea.append("\nIVA: 4%");
+					}
+					if (buttonGroup_1.getSelection().equals(iva10)) {
+						textArea.append("\nIVA: 10%");
+					}
+					if (buttonGroup_1.getSelection().equals(iva21)) {
+						textArea.append("\nIVA: 21%");
+					}
+				} else {
+					textArea.append("\nIVA: No Seleccionado");
+				}
+
 				if (chckbxInforme.isSelected()) {
 					textArea.append("\nTasa aplicada");
+				} else {
+					textArea.append("\nTasa no aplicada");
 				}
 			}
 		});
@@ -133,9 +158,9 @@ public class Ventana1 extends JFrame {
 		JButton btnLimpiarDatos = new JButton("Limpiar Datos");
 		btnLimpiarDatos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("SE HA PULSADO EL BOTÓN LIMPIAR DATOS.");
 				textField_1.setText("");
 				textField_2.setText("");
+				textArea.setText("");
 			}
 		});
 		btnLimpiarDatos.setForeground(Color.WHITE);
@@ -153,38 +178,33 @@ public class Ventana1 extends JFrame {
 		lblLocalidadDepartamento_1.setBounds(48, 109, 175, 15);
 		contentPane.add(lblLocalidadDepartamento_1);
 
-		textArea = new JTextArea();
-		textArea.setBounds(48, 402, 380, 156);
-		contentPane.add(textArea);
-		textArea.setText("");
-
 		JLabel lblTipoDepartamento = new JLabel("Categoría");
 		lblTipoDepartamento.setBounds(48, 200, 156, 15);
 		contentPane.add(lblTipoDepartamento);
 
-		rdbtnNewRadioButton = new JRadioButton("Extra Premium");
-		rdbtnNewRadioButton.setForeground(Color.BLUE);
-		buttonGroup.add(rdbtnNewRadioButton);
-		rdbtnNewRadioButton.setBounds(182, 196, 149, 23);
-		contentPane.add(rdbtnNewRadioButton);
+		rdbtnextraPremium = new JRadioButton("Extra Premium");
+		rdbtnextraPremium.setForeground(Color.BLUE);
+		buttonGroup.add(rdbtnextraPremium);
+		rdbtnextraPremium.setBounds(182, 196, 149, 23);
+		contentPane.add(rdbtnextraPremium);
 
-		rdbtnAdministracin = new JRadioButton("Premium");
-		rdbtnAdministracin.setForeground(Color.BLUE);
-		buttonGroup.add(rdbtnAdministracin);
-		rdbtnAdministracin.setBounds(351, 196, 92, 23);
-		contentPane.add(rdbtnAdministracin);
+		rdbtnPremium = new JRadioButton("Premium");
+		rdbtnPremium.setForeground(Color.BLUE);
+		buttonGroup.add(rdbtnPremium);
+		rdbtnPremium.setBounds(351, 196, 92, 23);
+		contentPane.add(rdbtnPremium);
 
-		rdbtnInformatica = new JRadioButton("Primera");
-		rdbtnInformatica.setForeground(Color.BLUE);
-		buttonGroup.add(rdbtnInformatica);
-		rdbtnInformatica.setBounds(351, 237, 92, 23);
-		contentPane.add(rdbtnInformatica);
+		rdbtnPrimera = new JRadioButton("Primera");
+		rdbtnPrimera.setForeground(Color.BLUE);
+		buttonGroup.add(rdbtnPrimera);
+		rdbtnPrimera.setBounds(351, 237, 92, 23);
+		contentPane.add(rdbtnPrimera);
 
-		rdbtnContabilidad = new JRadioButton("Segunda");
-		rdbtnContabilidad.setForeground(Color.BLUE);
-		buttonGroup.add(rdbtnContabilidad);
-		rdbtnContabilidad.setBounds(182, 237, 149, 23);
-		contentPane.add(rdbtnContabilidad);
+		rdbtnSegunda = new JRadioButton("Segunda");
+		rdbtnSegunda.setForeground(Color.BLUE);
+		buttonGroup.add(rdbtnSegunda);
+		rdbtnSegunda.setBounds(182, 237, 149, 23);
+		contentPane.add(rdbtnSegunda);
 
 		chckbxInforme = new JCheckBox("Aplicar tasa");
 		chckbxInforme.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 12));
@@ -209,5 +229,14 @@ public class Ventana1 extends JFrame {
 		buttonGroup_1.add(radioButton_2);
 		radioButton_2.setBounds(254, 288, 59, 23);
 		contentPane.add(radioButton_2);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(48, 395, 355, 165);
+		contentPane.add(scrollPane);
+
+		textArea = new JTextArea();
+		scrollPane.setViewportView(textArea);
+		textArea.setText("");
+		textArea.setEditable(false);
 	}
 }
