@@ -15,6 +15,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextArea;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
+import javax.swing.JCheckBox;
 
 public class Ventana1 extends JFrame {
 
@@ -22,6 +27,13 @@ public class Ventana1 extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JComboBox comboBoxPais;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JRadioButton rdbtnNewRadioButton;
+	private JRadioButton rdbtnAdministracin;
+	private JRadioButton rdbtnInformatica;
+	private JRadioButton rdbtnContabilidad;
+	private JCheckBox chckbxInforme;
 
 	/**
 	 * Launch the application.
@@ -45,7 +57,7 @@ public class Ventana1 extends JFrame {
 	public Ventana1() {
 		setTitle("Ventana 1");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 499, 370);
+		setBounds(100, 100, 630, 511);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -91,6 +103,29 @@ public class Ventana1 extends JFrame {
 				System.out.println("Código tecleado en Código: " + textField.getText());
 				System.out.println("Código tecleado en Nombre: " + textField_1.getText());
 				System.out.println("Código tecleado en Dpto: " + textField_2.getText());
+				System.out.println("Posición: " + comboBoxPais.getSelectedIndex());
+				System.out.println("Contenido: " + comboBoxPais.getSelectedItem());
+				ButtonModel personal = rdbtnNewRadioButton.getModel();
+				ButtonModel admin = rdbtnAdministracin.getModel();
+				ButtonModel inform = rdbtnInformatica.getModel();
+				ButtonModel contab = rdbtnContabilidad.getModel();
+				if (buttonGroup.getSelection() != null) {
+					if (buttonGroup.getSelection().equals(personal)) {
+						System.out.println("Has pulsado Personal.");
+					}
+					if (buttonGroup.getSelection().equals(admin)) {
+						System.out.println("Has pulsado Administración.");
+					}
+					if (buttonGroup.getSelection().equals(inform)) {
+						System.out.println("Has pulsado Informática.");
+					}
+					if (buttonGroup.getSelection().equals(contab)) {
+						System.out.println("Has pulsado Contabilidad.");
+					}
+				}
+				if (chckbxInforme.isSelected()) {
+					System.out.println("Check pulsado. " + chckbxInforme.getText());
+				}
 			}
 		});
 		btnInsertarDatos.setForeground(Color.WHITE);
@@ -111,14 +146,50 @@ public class Ventana1 extends JFrame {
 		btnLimpiarDatos.setBackground(Color.BLUE);
 		btnLimpiarDatos.setBounds(261, 268, 149, 25);
 		contentPane.add(btnLimpiarDatos);
-		
-		JComboBox comboBoxPais = new JComboBox();
-		comboBoxPais.setModel(new DefaultComboBoxModel(new String[] {"España", "Francia", "Portugal", "Italia"}));
+
+		comboBoxPais = new JComboBox();
+		comboBoxPais.setModel(new DefaultComboBoxModel(new String[] { "España", "Francia", "Portugal", "Italia" }));
 		comboBoxPais.setBounds(254, 211, 156, 24);
 		contentPane.add(comboBoxPais);
-		
+
 		JLabel lblLocalidadDepartamento_1 = new JLabel("Localidad Departamento");
 		lblLocalidadDepartamento_1.setBounds(48, 167, 175, 15);
 		contentPane.add(lblLocalidadDepartamento_1);
+
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(48, 309, 380, 156);
+		contentPane.add(textArea);
+		textArea.setText("");
+		textArea.setText("Primera línea.");
+
+		JLabel lblTipoDepartamento = new JLabel("Tipo Departamento");
+		lblTipoDepartamento.setBounds(452, 55, 156, 15);
+		contentPane.add(lblTipoDepartamento);
+
+		rdbtnNewRadioButton = new JRadioButton("Personal");
+		buttonGroup.add(rdbtnNewRadioButton);
+		rdbtnNewRadioButton.setBounds(459, 92, 149, 23);
+		contentPane.add(rdbtnNewRadioButton);
+
+		rdbtnAdministracin = new JRadioButton("Administración");
+		buttonGroup.add(rdbtnAdministracin);
+		rdbtnAdministracin.setBounds(459, 137, 149, 23);
+		contentPane.add(rdbtnAdministracin);
+
+		rdbtnInformatica = new JRadioButton("Informatica");
+		buttonGroup.add(rdbtnInformatica);
+		rdbtnInformatica.setBounds(459, 183, 149, 23);
+		contentPane.add(rdbtnInformatica);
+
+		rdbtnContabilidad = new JRadioButton("Contabilidad");
+		buttonGroup.add(rdbtnContabilidad);
+		rdbtnContabilidad.setBounds(459, 227, 149, 23);
+		contentPane.add(rdbtnContabilidad);
+
+		chckbxInforme = new JCheckBox("Informe");
+		chckbxInforme.setBounds(459, 269, 129, 23);
+		contentPane.add(chckbxInforme);
+		textArea.append("\nSegunda línea");
+		textArea.append("\nTercera línea");
 	}
 }
