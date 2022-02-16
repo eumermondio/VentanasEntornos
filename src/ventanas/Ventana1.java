@@ -1,4 +1,4 @@
-package i12laroa;
+package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
@@ -165,7 +166,7 @@ public class Ventana1 extends JFrame {
 		});
 		btnLimpiarDatos.setForeground(Color.WHITE);
 		btnLimpiarDatos.setBackground(Color.BLUE);
-		btnLimpiarDatos.setBounds(254, 347, 149, 25);
+		btnLimpiarDatos.setBounds(279, 347, 149, 25);
 		contentPane.add(btnLimpiarDatos);
 
 		comboBoxProducto = new JComboBox();
@@ -238,5 +239,22 @@ public class Ventana1 extends JFrame {
 		scrollPane.setViewportView(textArea);
 		textArea.setText("");
 		textArea.setEditable(false);
+
+		JButton btnInsertarOficina = new JButton("Insertar oficina");
+		btnInsertarOficina.setBackground(Color.BLUE);
+		btnInsertarOficina.setForeground(Color.WHITE);
+		btnInsertarOficina.setBounds(48, 310, 149, 25);
+		contentPane.add(btnInsertarOficina);
+		btnInsertarOficina.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					Dialogo1 dialog = new Dialogo1();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }
